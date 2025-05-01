@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: php:7.4-apache                         
+    platform: linux/amd64
+    volumes:
+      - ./php:/var/www/html                 #collego la cartella php al server
+    ports:
+      - "8080:80"                           #mostro la porta 80 del container sulla 8080 
+    depends_on:
+      - db                                  #parte solo dopo che il db è pronto
+
+  db:
+    image: mysql:8                         #db mysql
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root            #pass dell'utente root
+      MYSQL_DATABASE: test                 #nome del database creato
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d   #i file SQL qui dentro verranno eseguiti all'avvio
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/amd64
+    restart: always                        #phpmyadmin si riavvii auto quando qualcosa non va
+    ports:
+      - "8081:80"                          #accesso phpmyadmin su localhost:8081
+    environment:
+      PMA_HOST: db                         #nome del servizio db (per collegarsi al mysql)
+      MYSQL_ROOT_PASSWORD: root
