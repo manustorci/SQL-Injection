@@ -1,31 +1,13 @@
 <?php
-$conn = new mysqli('db', 'root', 'root', 'test'); // connessione a MySQL
+$conn = new mysqli('db', 'root', 'root', 'test'); //connetto a mysql
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $errore = "";
 
-if (isset($_POST['nome']) && isset($_POST['password'])) {
-    $nome = $_POST['nome'];
-    $pass = $_POST['password'];
 
-    // Query vulnerabile a SQL injection
-    $sql = "SELECT * FROM utenti WHERE nome = '$nome' AND pass = '$pass'";
-    $result = $conn->query($sql);
-
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $ruolo = $row['ruolo'];
-        $nomeUtente = $row['nome'];
-        header("Location: segreto.php?ruolo=$ruolo&nome=$nomeUtente");
-        exit();
-    } else {
-        $errore = "Password errata!";
-    }
-
-    $conn->close();
-}
+    
 ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -55,7 +37,9 @@ if (isset($_POST['nome']) && isset($_POST['password'])) {
 </head>
 <body>
     <h1>sql injection</h1>
-    <form method="post">
+    <form method="post"
+        action="ruoli.php"
+        >
         nome: <input type="text" name="nome"/>
         password: <input type="text" name="password"/>
         <button type="submit">invia</button>

