@@ -1,47 +1,58 @@
-## Project Introduction
+# SQL Injection – Educational Project
 
-This project simulates the login page of a web application in order to demonstrate
-how **SQL Injection vulnerabilities** can lead to violations of the three
-fundamental principles of the **CIA Triad**:
+⚠️ **For educational purposes only**
 
-- Confidentiality
-- Integrity
-- Availability
+This project demonstrates how SQL Injection vulnerabilities can compromise the
+three fundamental principles of the **CIA Triad**:
+**Confidentiality, Integrity and Availability**.
 
-### Attack Scenarios
+The application is intentionally vulnerable and must never be deployed in
+production environments.
 
-The goal of the project is to demonstrate how an attacker can:
+## Project Overview
+The project simulates a login page of a web application affected by SQL Injection
+vulnerabilities due to unsafe server-side SQL query handling.
 
-- **Compromise Confidentiality** by bypassing authentication and accessing the
-  web application without valid credentials.
-- **Compromise Integrity** by manipulating accessible data and performing
-  unauthorized modifications.
-- **Compromise Availability** by deleting the users table from the database,
-  rendering the system unusable.
+The goal is to show, in a controlled environment, how an attacker can:
+- Bypass authentication
+- Access sensitive data
+- Manipulate or delete database content
 
-At the end of the attack simulation, the server is no longer operational.
+## Architecture
+The application runs inside a containerized environment and is composed of:
 
-### Attack Environment
+- PHP backend exposed via Apache
+- MySQL database for user and transaction storage
+- Docker Compose for environment orchestration
 
-The web application is built using the following architecture:
+## Code Structure (High-Level)
+The repository contains the following main components:
 
-- A **PHP backend** responsible for handling APIs and the web interface,
-  exposed through **Apache**
-- A **MySQL database** used to store users and transaction data
+- `index.php` – login endpoint and main attack entry point
+- `ruoli.php` – displays the role associated with the authenticated user
+- `utenti.php` – exposes user-related data
+- `transazioni.php` – displays transactions associated with users
+- `docker-compose.yml` – defines and starts the Dockerized environment
 
-The entire environment is managed using **Docker Compose** to ensure ease of
-execution across different machines.
+## Attack Simulation
+The project demonstrates multiple SQL Injection attack scenarios, including:
 
-Two separate containers are used:
-- A web server container running PHP and Apache on port **80**
-- A MySQL database container running on port **3306**
+- Authentication bypass via tautology
+- Unauthorized access using SQL comments
+- Destructive attacks using piggyback queries
 
-The application contains vulnerabilities caused by unsafe server-side SQL query
-handling. These vulnerabilities can be exploited to perform **SQL Injection**
-attacks.
+Each attack is mapped to a specific violation of the CIA Triad.
 
-The attack is carried out by forcing malicious interactions with the PHP login
-endpoint and the user management APIs, allowing the attacker to bypass
-authentication and gain access to sensitive data.
+## Documentation
+Detailed technical documentation, including:
+- Code analysis
+- SQL payloads
+- Database schema
+- Step-by-step attack simulations
 
+is available in the following document:
 
+📄 **[SQL_INJECTION.pdf](./SQL_INJECTION.pdf)**
+
+## Disclaimer
+This project is intended strictly for educational and security research purposes.
