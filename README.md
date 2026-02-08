@@ -1,4 +1,4 @@
-# SQL Injection – Educational Project
+# SQL Injection
 
 ⚠️ **For educational purposes only**
 
