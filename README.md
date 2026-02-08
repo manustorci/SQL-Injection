@@ -52,7 +52,8 @@ Detailed technical documentation, including:
 
 is available in the following document:
 
-📄 **[SQL_INJECTION.pdf](./SQL_INJECTION.pdf)**
+📄 **[ENG](./Documentation.pdf)**
+📄 **[ITA](./Documentazione.pdf)**
 
 ## Disclaimer
 This project is intended strictly for educational and security research purposes.
