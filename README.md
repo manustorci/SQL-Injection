@@ -52,8 +52,9 @@ Detailed technical documentation, including:
 
 is available in the following document:
 
-📄 **[ENG](./Documentation.pdf)**
-📄 **[ITA](./Documentazione.pdf)**
+📄 **[ENG - Documentation](./Documentation.pdf)**
+
+📄 **[ITA - Documentazione](./Documentazione.pdf)**
 
 ## Disclaimer
 This project is intended strictly for educational and security research purposes.
